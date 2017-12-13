@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>classifierInterface</class>
+ <widget class="QMainWindow" name="classifierInterface">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1564</width>
+    <height>1020</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>10</y>
+      <width>301</width>
+      <height>210</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="scalerLabel">
+         <property name="text">
+          <string>scaler:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="scalerComboBox">
+         <item>
+          <property name="text">
+           <string>None</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>MinMaxScaler</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RobustScaler</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>StandardScaler</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Normalizer</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QLabel" name="reduceDimLabel">
+         <property name="text">
+          <string>reduceDimension:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="reduceDimComboBox">
+         <item>
+          <property name="text">
+           <string>None</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PCA</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>TSNE</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="clusterLabel">
+         <property name="text">
+          <string>clusterAlgorithm:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="clusterComboBox">
+         <item>
+          <property name="text">
+           <string>KMeans</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Agglomerative</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DBSCAN</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="needN_clusterLayout">
+       <item>
+        <widget class="QLabel" name="n_clusterLabel">
+         <property name="text">
+          <string>n_clusters:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="n_clusterLineEdit"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="min_samplesLabel">
+         <property name="text">
+          <string>min_samples:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="min_samplesLineEdit"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLabel" name="epsLabel">
+         <property name="text">
+          <string>eps:            </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="epsLineEdit"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="classifyPushButton">
+       <property name="text">
+        <string>classify</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>721</width>
+      <height>411</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="visualizaionField"/>
+   </widget>
+   <widget class="QTextEdit" name="stateTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>240</y>
+      <width>301</width>
+      <height>171</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>440</y>
+      <width>1541</width>
+      <height>521</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1564</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>파일</string>
+    </property>
+    <widget class="QMenu" name="save">
+     <property name="title">
+      <string>save</string>
+     </property>
+     <addaction name="actionSaveImage"/>
+     <addaction name="actionSaveClusters"/>
+    </widget>
+    <addaction name="save"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>설정</string>
+    </property>
+    <addaction name="actionScaleSize"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionCollect_and_stuff_data">
+   <property name="text">
+    <string>collect and stuff data</string>
+   </property>
+  </action>
+  <action name="actionSolveAverageValues">
+   <property name="text">
+    <string>solveAverageValues</string>
+   </property>
+  </action>
+  <action name="actionScaleSize">
+   <property name="text">
+    <string>scaleSize</string>
+   </property>
+  </action>
+  <action name="actionSaveImage">
+   <property name="text">
+    <string>saveImage</string>
+   </property>
+  </action>
+  <action name="actionSaveClusters">
+   <property name="text">
+    <string>saveClusters</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
