@@ -83,7 +83,6 @@ class LOLDatabase:
 
         for command in settingCommands:
             try:
-                #print(command)
                 self.cur.execute(command)
                 self.cur.connection.commit()
 
@@ -102,14 +101,10 @@ class LOLDatabase:
                     raise e
 
     def useDatabase(self):
-
-
         self.cur.execute("USE LeagueOfLegend")
-        print("USE LeagueOfLegend")
 
     def insertSummoner(self,json):
         try:
-            #print("INSERT INTO summoner (name,profileIconId,summonerLevel,revisionDate,id,accountId) VALUES (\"{}\",{},{},{},{},{})".format(json["name"],json["profileIconId"],json["summonerLevel"],json["revisionDate"],json["id"],json["accountId"]))
             self.cur.execute("INSERT INTO summoner (name,profileIconId,summonerLevel,revisionDate,id,accountId) VALUES (\"{}\",{},{},{},{},{})".format(json["name"],json["profileIconId"],json["summonerLevel"],json["revisionDate"],json["id"],json["accountId"]))
             print("INSERT INTO summoner (name,profileIconId,summonerLevel,revisionDate,id,accountId) VALUES (\"{}\",{},{},{},{},{})".format(json["name"],json["profileIconId"],json["summonerLevel"],json["revisionDate"],json["id"],json["accountId"]))
         except pymysql.err.IntegrityError as e:
@@ -130,7 +125,6 @@ class LOLDatabase:
 
         if condition != "":
             sql += " WHERE" + condition
-        #print(sql)
         self.cur.execute(sql)
         print(sql)
 
@@ -138,9 +132,6 @@ class LOLDatabase:
 
     def insertMatchID(self,jsonlist):
         for i,json in enumerate(jsonlist):
-            #print("INSERT INTO matchreference (gameId,lane,champion,platformId,season,queue,role,timestamp)"
-                             #"VALUES ({},\"{}\",{},\"{}\',{},{},\"{}\",{})"
-                            # .format(json["gameId"],json["lane"],json["champion"],json["platformId"],json["season"],json["queue"],json["role"],json["timestamp"]))
             try:
                 self.cur.execute("INSERT INTO matchreference (gameId,lane,champion,platformId,season,queue,role,timestamp)"
                                  "VALUES ({},\"{}\",{},\"{}\",{},{},\"{}\",{})"
@@ -173,31 +164,12 @@ class LOLDatabase:
 
         if condition != "":
             sql += " WHERE" + condition
-        #print(sql)
         self.cur.execute(sql)
         print(sql)
         return self.cur.fetchall()
 
     def insertIndividualGamer(self,matchJson):
         for i,(identity,participant) in enumerate(zip(matchJson["participantIdentities"],matchJson["participants"])):
-            '''
-            print(i)
-            print(matchJson["gameId"])
-            print(identity["player"]["accountId"])
-            print(participant["championId"])
-            print(participant["stats"]["kills"])
-            print(participant["stats"]["deaths"])
-            print(participant["stats"]["assists"])
-            print(participant["stats"]["totalMinionsKilled"])
-            print(participant["stats"]["goldEarned"])
-            print(participant["stats"]["timeCCingOthers"])
-            print(participant["stats"]["totalDamageDealtToChampions"])
-            print(participant["stats"]["totalDamageTaken"])
-            print(participant["stats"]["visionScore"])
-            print(participant["spell1Id"])
-            print(participant["spell2Id"])
-            print(participant["stats"]["win"])
-            print(matchJson["gameDuration"])'''
             try:
                 self.cur.execute(
                 "INSERT INTO individualGamer (gamerid,gameid,accountId,championId,kills,deaths,assists,totalMinionsKilled,goldEarned,timeCCingOthers,totalDamageDealtToChampions,totalDamageTaken,visionScore,spell1Id,spell2Id,win,gameDuration)"
@@ -209,19 +181,6 @@ class LOLDatabase:
                         participant["stats"]["totalDamageTaken"], participant["stats"]["visionScore"],
                         participant["spell1Id"], participant["spell2Id"], participant["stats"]["win"],
                         matchJson["gameDuration"]))
-                print(
-                    "INSERT INTO individualGamer (gamerid,gameid,accountId,championId,kills,deaths,assists,totalMinionsKilled,goldEarned,timeCCingOthers,totalDamageDealtToChampions,totalDamageTaken,visionScore,spell1Id,spell2Id,win,gameDuration)"
-                    "VALUES ({},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{})"
-                        .format(int(str(matchJson["gameId"]) + str(identity["player"]["accountId"])),
-                                matchJson["gameId"], identity["player"]["accountId"], participant["championId"],
-                                participant["stats"]["kills"], participant["stats"]["deaths"],
-                                participant["stats"]["assists"],
-                                participant["stats"]["totalMinionsKilled"], participant["stats"]["goldEarned"],
-                                participant["stats"]["timeCCingOthers"],
-                                participant["stats"]["totalDamageDealtToChampions"],
-                                participant["stats"]["totalDamageTaken"], participant["stats"]["visionScore"],
-                                participant["spell1Id"], participant["spell2Id"], participant["stats"]["win"],
-                                matchJson["gameDuration"]))
                 self.cur.connection.commit()
             except pymysql.err.IntegrityError as e:
                 if e.args[0] == 1062:
@@ -242,7 +201,6 @@ class LOLDatabase:
 
         if condition != "":
             sql += " WHERE" + condition
-        #print(sql)
         self.cur.execute(sql)
         print(sql)
         return self.cur.fetchall()
@@ -251,8 +209,6 @@ class LOLDatabase:
         for championId in championIdList:
             try:
                 self.cur.execute("INSERT INTO champion (championId,championName) VALUES({},\"{}\")".format(championId,championIdList[championId]))
-                print("INSERT INTO champion (championId,championName) VALUES({},\"{}\")".format(championId,championIdList[championId]))
-
                 self.cur.connection.commit()
             except pymysql.err.IntegrityError as e:
                 if e.args[0] == 1062:
@@ -260,7 +216,6 @@ class LOLDatabase:
                 else:
                     raise e
     def showChampionId(self,championId=None,championName=None,choosedata='*'):
-
         sql = "SELECT " + choosedata + " from champion"
         condition = ""
         param_list = [championId, championName]
@@ -273,18 +228,12 @@ class LOLDatabase:
 
         if condition != "":
             sql += " WHERE" + condition
-        # print(sql)
         self.cur.execute(sql)
-        print(sql)
         return self.cur.fetchall()
-
     def insertSummonerSpell(self,spellList):
-        #print(spellList)
         for key in spellList:
             try:
                 self.cur.execute("INSERT INTO spell (spellId,spellName) VALUES({},\"{}\")".format(spellList[key]["id"],spellList[key]["name"]))
-                print("INSERT INTO spell (spellId,spellName) VALUES({},\"{}\")".format(spellList[key]["id"],spellList[key]["name"]))
-
                 self.cur.connection.commit()
             except pymysql.err.IntegrityError as e:
                 if e.args[0]==1062:
@@ -304,9 +253,7 @@ class LOLDatabase:
 
         if condition != "":
             sql += " WHERE" + condition
-        #print(sql)
         self.cur.execute(sql)
-        print(sql)
 
         return self.cur.fetchall()
 
@@ -315,14 +262,10 @@ class LOLDatabase:
         self.cur.execute("INSERT INTO championAverage "
                          "(championId,kills,deaths,assists,totalMinionsKilled,goldEarned,timeCCingOthers,totalDamageDealtToChampions,totalDamageTaken,visionScore,mostUsableSpell,secondUsableSpell,thirdUsableSpell) "
                          "VALUES({},{},{},{},{},{},{},{},{},{},{},{},{})".format(championId,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]))
-        print("INSERT INTO championAverage "
-                         "(championId,kills,deaths,assists,totalMinionsKilled,goldEarned,timeCCingOthers,totalDamageDealtToChampions,totalDamageTaken,visionScore,mostUsableSpell,secondUsableSpell,thirdUsableSpell) "
-                         "VALUES({},{},{},{},{},{},{},{},{},{},{},{},{})".format(championId, a[0], a[1], a[2], a[3],
-                                                                                 a[4], a[5], a[6], a[7], a[8], a[9],
-                                                                                 a[10], a[11]))
-
         self.cur.connection.commit()
-
+    def removeChampionAverage(self):
+        self.cur.execute("DELETE FROM championAverage")
+        self.cur.connection.commit()
     def showChmpionAverage(self,championId=None,mostUsableSpell=None,secondUsableSpell=None,thirdUsableSpell=None,choosedata='*'):
         sql = "SELECT " + choosedata + " from championaverage"
         condition = ""
@@ -336,9 +279,7 @@ class LOLDatabase:
 
         if condition != "":
             sql += " WHERE" + condition
-        #print(sql)
         self.cur.execute(sql)
-        print(sql)
         return self.cur.fetchall()
 
     def fetchone(self):
@@ -349,21 +290,3 @@ class LOLDatabase:
         self.cur.close()
         self.conn.close()
 
-
-if __name__ == "__main__":
-    dataset = LOLDatabase()
-    dataset.useDatabase()
-    '''
-    summoner = dataset.showSummoner("네로의하루")
-    print(type(summoner))
-    print(summoner)'''
-    print(dataset.showSummoner())
-    print(dataset.showSummoner(name="네로의하루",profileIconId=3006))
-    print(dataset.showSummoner(profileIconId=3006))
-    print(dataset.showSummoner(summonerLevel=30))
-    print(dataset.showSummoner(revisionDate=1508138876000))
-    print(dataset.showSummoner(id=4114782))
-    print(dataset.showSummoner(accountId=3332761))
-
-
-    dataset.close()

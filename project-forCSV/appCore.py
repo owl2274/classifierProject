@@ -1,6 +1,4 @@
-from libraries.nonGuidePipe import chain
-import libraries.lol_database as lol_database
-from libraries.lol_api import LOLApi
+from libraries.pipeForUnsupervised import chain
 from libraries.eachMinMaxScaler import EachMinMaxScaler
 from sklearn.decomposition import PCA
 import numpy as np

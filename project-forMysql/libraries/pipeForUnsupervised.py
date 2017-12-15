@@ -19,7 +19,6 @@ class chain():
     def __init__(self,steps):
 
         self.steps = steps
-       # print(self.steps)
     def fit_predict(self, X):
         X_transformed = X
         self.transformOutputSteps = []
