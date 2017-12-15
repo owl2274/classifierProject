@@ -126,7 +126,6 @@ class LOLDatabase:
         if condition != "":
             sql += " WHERE" + condition
         self.cur.execute(sql)
-        print(sql)
 
         return self.cur.fetchall()
 
@@ -165,7 +164,6 @@ class LOLDatabase:
         if condition != "":
             sql += " WHERE" + condition
         self.cur.execute(sql)
-        print(sql)
         return self.cur.fetchall()
 
     def insertIndividualGamer(self,matchJson):
@@ -202,7 +200,6 @@ class LOLDatabase:
         if condition != "":
             sql += " WHERE" + condition
         self.cur.execute(sql)
-        print(sql)
         return self.cur.fetchall()
 
     def insertChampionId(self,championIdList):

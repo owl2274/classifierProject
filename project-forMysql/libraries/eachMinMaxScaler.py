@@ -15,5 +15,4 @@ class EachMinMaxScaler():
                 transformedDataSet[:,i] = np.zeros_like(transformedDataSet[:,i])
             else:
                 transformedDataSet[:,i] = MinMaxScaler(feature_range=(0,scaleSize)).fit_transform(transformedDataSet[:,i].reshape(-1,1)).reshape(1,-1)
-            #print(transformedDataSet[:, i])
         return transformedDataSet

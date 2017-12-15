@@ -25,7 +25,6 @@ class scalerDialog(QDialog):
         self.scalerDialogLayout.setObjectName("featureLayout")
 
         for i, featureName in enumerate(self.featureList):
-            print("hi!")
             self.featureLayout.append(QtWidgets.QHBoxLayout())
             self.featureLayout[i].setObjectName("horizontalLayout")
             self.label.append(QtWidgets.QLabel(self.widget))
